@@ -1,0 +1,15 @@
+Completa la siguiente tabla para los tipos de datos en C
+
+
+tipo de dato 			descripcion 				equivalente en pascal
+char		almacena un unico caracter (1 bite). El mismo debe estar        char
+		rodeado de ´´
+float		tipo de dato que almacena numeros reales con hasta   		single
+		3 decimales.(4 bites)
+int		tipo de dato que almacena numeros enteros desde			integer
+		−32,767, +32,767 . (2 bites)
+long		tipo de dato que almacena numeros enteros desde			longint
+		−9,223,372,036,854,775,807, +9,223,372,036,854,775,807	
+		(4 bites)	
+char*		se le asigna un puntero al char, que permite almacenar en	String
+		el una cadena de caracteres (no modificable)			(mas parecido)
