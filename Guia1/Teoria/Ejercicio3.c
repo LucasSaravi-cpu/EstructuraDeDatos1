@@ -1,3 +1,6 @@
+/* Leer nombre y 3 notas de un conjunto de N alumnos, mostrar el nombre del alumno que obtuvo el 
+mejor promedio.*/
+
 #include <stdio.h>
 #include <string.h>
 
@@ -8,7 +11,7 @@ int main() {
     float promedio, maxpromedio = 0;
     char nombremaxpromedio[50];
 
-    printf("Ingrese el número de alumnos (N): ");
+    printf("Ingrese el nÃºmero de alumnos (N): ");
     scanf("%d", &cantidad);
 
 
