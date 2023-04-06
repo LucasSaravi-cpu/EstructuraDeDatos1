@@ -1,0 +1,43 @@
+Ej 1.- Dadas las siguientes declaraciones:
+
+float *pf1, *pf2, *pf3, a1, a2;
+char *pch1, *pch2, ch1, ch2;
+
+Indicar cuáles de las siguientes sentencias son correctas y cuáles no. Justificar.
+a.- *pf1 = *pf2 + 1;
+
+Verdadero si pf1 y pf2 ya hayan sido apuntados a variables 
+b.- pf1 += pf2;
+falso, ya que se le esta sumando a una direccion a otra direccion
+
+c.- printf(“%f”, pf1);
+falso, una direccion hexadecimal no se muestra en formato float
+
+d.- a1 = &pf1;
+falso, ya que no se le puede asignar a un float, un valor hexadecimal.
+
+e.- pf2 = a2; 
+falso, pf2 apunta al lugar donde la variable a2 se encuentra, pero hace falta el & adelante de a2.
+
+f.- pf2 = NULL;
+En caso de que se declaren variables puntero nulas de esa forma, verdadero
+
+g.- *pf3 = a2 * 2;
+En caso de que pf3 este apuntando a una variable ya de antes, la sentencia es correcta,
+ya que a la variable a la que apunte pf3, se le va a asignar el valor de a2 * 2.
+
+h.- *pf1 = *pf3;
+verdadero, en caso de que pf3 y pf1 tengan asignadas ya una variable, se introduciria en 
+la variable a la que apunta pf1, el valor de la variable a la que apunta pf3.
+
+i.- pf3 = pf2;
+verdadero en caso de que pf2 tengan una direccion a una variable o sean de valor nulo.
+
+j.- scanf(“%c”,pch2);
+falso,ya que no se puede leer un caracter de una asignacion en memoria
+
+k.- pch2 = 'a';
+falso, no se puede asignar un caracter a un lugar en memoria
+
+l.- pch = &ch1;
+verdadero, se asigna a pch el lugar de memoria de ch1.
