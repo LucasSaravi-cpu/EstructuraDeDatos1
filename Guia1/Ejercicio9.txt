@@ -1,0 +1,61 @@
+Ej 9 – Transformar las siguientes sentencias utilizando la instrucción switch (x entero, Func es
+char).
+a)
+if (x == 4)
+ y = 7;
+else
+ if (x == 5)
+ y = 9;
+ else
+ if(x == 9)
+ y = 14;
+ else
+ y = 22;
+
+switch(x) {
+	case 4:
+		y = 7;
+	break;
+	case 5:
+		y = 9;
+	break;
+	case 9:
+		y = 14;
+	break;
+	default: y = 22;
+	
+}
+b)
+ff (Func == ’s’ || Func == ’S’)
+ r = x + y;
+else
+ ff (Func == ’r’ || Func == ’R’)
+ r = x - y;
+ else
+ if (Func == ’m’ || Func == ’M’)
+ r = x * y;
+ else
+ if(Func == ’d’ || Func == ’D’)
+ y = x/y;
+ else
+ y = 0;
+
+switch (Func) {
+	case 's':
+	case 'S':
+		 r = x + y;
+	break;
+	case 'r':
+	case 'R':
+		r = x - y;
+	break;
+	case 'm':
+	case:'M':
+		r = x * y;
+	break;
+	case: 'd':
+	case:'D':
+		y = x/y;
+	break;
+	default: y = 0;
+}
