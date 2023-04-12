@@ -1,0 +1,14 @@
+Ej 11 – Desarrollar una macro que devuelva cada uno de los siguientes resultados:
+
+a) el cuadrado de un número.
+#define cuad(a) (a*a) 
+
+b) la suma de dos números.
+#define sum(a,b) (a+b)
+
+c) para un valor que representa grados en radianes.
+#define PI 3.14
+#define rad(g) g/180.0*PI //aproximacion 
+
+d) el mínimo de dos números.
+#define min(a,b) (a>b) ? b:a
