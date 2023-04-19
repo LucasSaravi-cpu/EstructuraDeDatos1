@@ -1,56 +1,54 @@
-/*Ej 15 – Desarrollar un programa que solicite por teclado N y los siguientes datos de N alumnos:
+/*Ej 15 â€“ Desarrollar un programa que solicite por teclado N y los siguientes datos de N alumnos:
 Nombre (cadena de 30), Numero de Matricula (entero), Nombre de Carrera (cadena de 30).
 Almacenar estos datos en un arreglo de structs.
-Muestre por pantalla los datos ingresados con un alumno por línea solo para aquellos que estudian
-Ingeniería en Informática
+Muestre por pantalla los datos ingresados con un alumno por lÃ­nea solo para aquellos que estudian
+IngenierÃ­a en InformÃ¡tica
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-// Definición de la estructura Alumno
-struct Alumno {
+#define MAX_N 100
+
+typedef struct {
     char nombre[30];
     int matricula;
     char carrera[30];
-};
+} Alumno;
 
 int main() {
     int n;
+    Alumno alumnos[MAX_N];
 
-    // Solicitar por teclado el número de alumnos
-    printf("Ingrese el número de alumnos: ");
+    // Pedir el nÃºmero de alumnos
+    printf("Ingrese el numero de alumnos: ");
     scanf("%d", &n);
 
-    // Declarar y crear un arreglo de N elementos de tipo Alumno
-    struct Alumno alumnos[n];
+    // Limpiar el buffer de entrada
+    fflush(stdin);
 
-    // Solicitar por teclado los datos de cada alumno
+    // Leer los datos de cada alumno
     for (int i = 0; i < n; i++) {
-        printf("Datos del alumno #%d\n", i + 1);
-
-        // Nombre
+        printf("Alumno %d:\n", i+1);
         printf("Nombre: ");
-        scanf(" %[^\n]s", alumnos[i].nombre);
-
-        // Número de matrícula
-        printf("Número de matrícula: ");
+        fgets(alumnos[i].nombre, 30, stdin);
+        printf("Matricula: ");
         scanf("%d", &alumnos[i].matricula);
-
-        // Carrera
+        fflush(stdin);
         printf("Carrera: ");
-        scanf(" %[^\n]s", alumnos[i].carrera);
-
-        printf("\n");
+        fgets(alumnos[i].carrera, 30, stdin);
     }
 
-    // Mostrar los datos de los alumnos que estudian Ingeniería en Informática
-    printf("Alumnos de Ingeniería en Informática:\n");
+    // Mostrar los datos de los alumnos que estudian IngenierÃ­a en InformÃ¡tica
+    printf("Alumnos de Ingenieria en Informtaica:\n");
     for (int i = 0; i < n; i++) {
-        if (strcmp(alumnos[i].carrera, "Ingenieria en Informatica") == 0) {
-            printf("%s y su numero de matricula es %d \n", alumnos[i].nombre, alumnos[i].matricula);
+        if (strcmp(alumnos[i].carrera, "ingenieria en informatica\n") == 0) {
+            printf(" Nombre:%s Matricula: %d, Carrera: %s " , alumnos[i].nombre, alumnos[i].matricula, alumnos[i].carrera);
+
         }
     }
 
     return 0;
 }
+
