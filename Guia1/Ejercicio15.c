@@ -1,4 +1,3 @@
-
 /*Ej 15 – Desarrollar un programa que solicite por teclado N y los siguientes datos de N alumnos:
 Nombre (cadena de 30), Numero de Matricula (entero), Nombre de Carrera (cadena de 30).
 Almacenar estos datos en un arreglo de structs.
@@ -33,12 +32,13 @@ int main() {
     for (int i = 0; i < n; i++) {
         printf("Alumno %d:\n", i+1);
         printf("Nombre: ");
-        fgets(alumnos[i].nombre, 30, stdin);
+        getchar(); // Para evitar problemas al leer cadenas
+        gets(alumnos[i].nombre);
         printf("Matricula: ");
         scanf("%d", &alumnos[i].matricula);
         fflush(stdin);
         printf("Carrera: ");
-        fgets(alumnos[i].carrera, 30, stdin);
+        scanf("%30[^\n]",alumnos[i].carrera);
     }
 
     // Mostrar los datos de los alumnos que estudian Ingeniería en Informática
@@ -52,4 +52,3 @@ int main() {
 
     return 0;
 }
-
