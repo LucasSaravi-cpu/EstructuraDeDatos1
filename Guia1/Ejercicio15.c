@@ -1,3 +1,4 @@
+
 /*Ej 15 – Desarrollar un programa que solicite por teclado N y los siguientes datos de N alumnos:
 Nombre (cadena de 30), Numero de Matricula (entero), Nombre de Carrera (cadena de 30).
 Almacenar estos datos en un arreglo de structs.
@@ -43,7 +44,7 @@ int main() {
     // Mostrar los datos de los alumnos que estudian Ingeniería en Informática
     printf("Alumnos de Ingenieria en Informtaica:\n");
     for (int i = 0; i < n; i++) {
-        if (strcmp(alumnos[i].carrera, "ingenieria en informatica\n") == 0) {
+        if (strcmp(alumnos[i].carrera, "ingenieria en informatica") == 0) {
             printf(" Nombre:%s Matricula: %d, Carrera: %s " , alumnos[i].nombre, alumnos[i].matricula, alumnos[i].carrera);
 
         }
