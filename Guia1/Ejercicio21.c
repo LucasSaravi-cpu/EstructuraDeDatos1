@@ -1,9 +1,9 @@
-/*Ej 21 – Dado un archivo binario en el que cada registro es de 17 dígitos para tres campos, 5
+/*Ej 21 â€“ Dado un archivo binario en el que cada registro es de 17 dÃ­gitos para tres campos, 5
 iniciales de ciudad, 5 superficie y 7 cantidad de habitantes. Escribir un programa que por pantalla
 muestre la ciudad con mas densidad de habitantes y la de menor densidad.*/
 #include <stdio.h>
 #include <string.h>
-//#define dens(a,b) a/b
+
 
 
 typedef struct {
