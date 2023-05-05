@@ -1,0 +1,4 @@
+Hector M 51 2 Juan 18 Diego 16
+Pedro  M 35 1 Lucia 7
+Raul M 20 0
+Monica F 54 2 Ana 20 Lucas 22
