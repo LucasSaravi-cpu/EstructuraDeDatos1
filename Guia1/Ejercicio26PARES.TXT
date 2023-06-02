@@ -1,0 +1,2 @@
+numero Fila Suma de todos los Pares
+0 24
