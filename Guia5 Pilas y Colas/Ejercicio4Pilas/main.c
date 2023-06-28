@@ -1,5 +1,5 @@
 /*Ejercicio 4 - Determinar si el valor que se encuentra en la base de una pila coincide con un valor dado.
-Resolverlo de 3 formas diferentes:
+
 a.- No es necesario conservar la pila.
 b.- Conservar la pila (Utilizar estructura auxiliar)
 
