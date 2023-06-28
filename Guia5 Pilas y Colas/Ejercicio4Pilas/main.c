@@ -20,12 +20,14 @@ void muestraP(TPila*); //Muestra la pila
 
 void main(){
     TPila p;
+    int x = 0
+    int aux;
     IniciaP(&p); // Inicialiso la pila
-    for(int i = 0;i<10;i++) { // Cargo la pila del 0 al MAXI 10
+    for(int i = 0;i<10;i++) { // Cargo la pila del 0 al 10
         poneP(&p,i);
     }
 
-    int x = 0,aux;
+ 
     /*
     //EjercicioA
     SeEncuentra(&p,&x);
