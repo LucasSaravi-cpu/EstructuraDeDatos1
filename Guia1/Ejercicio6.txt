@@ -1,6 +1,0 @@
-Ej 6 – Reescribir las siguientes sentencias según el ejemplo:
-Sentencia 		Equivale a
-n--; 			n = n – 1;
-n += 4;			n = n + 4;
-n -= a*2;		n = n - (a*2);
-n *= 3+2;		n = n *3 +2;
