@@ -1,0 +1,92 @@
+typedef struct { 
+char palo; 
+int nro; }Tcarta; 
+
+
+void main() { 
+int * Pt1, * Pt2, X=10; 
+Tcarta * PtCarta; 
+char * cad; 
+Pt1 = (int *) malloc(sizeof(int));  //reserva memoria 
+ if (Pt1 == NULL)  { 
+        printf("Error de memoria\n");}  //validarcion de malloc 
+
+scanf("%d",Pt1); // PT1 es una direccion valida 
+
+Pt2 = &X;  //pt2 apunta a una variable loca No es manejo de memoria dinámica
+ 
+printf("\n%d  %d", X, *Pt2);  //ambos muestran el mismo valor 
+*Pt2= *Pt1 + 4;  
+printf("\n%d  %d",*Pt1, *Pt2); 
+Pt2 = Pt1;  // incorrecto ahora ambos apuntan a la misma direccion   
+printf("\n%d  %d\n",*Pt1, *Pt2); 
+free(Pt2);   // se liberan las dos direcciones por que apuntan al mismo lugar
+free(Pt1); 
+PtCarta =(Tcarta *)malloc (sizeof(Tcarta)); 
+
+scanf("%d %c",&(PtCarta->nro), &((*PtCarta).palo)); 
+
+printf("\n%d  %c\n",(*PtCarta).nro, PtCarta->palo); 
+
+cad = (char *)malloc(30*sizeof(char)); 
+
+scanf("%s",cad); 
+printf("\n%c  %c",cad[0], cad[1]); 
+free(cad);  // cad=NULL? 
+free(PtCarta);   
+}
+
+
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct nodo {
+    char palo;
+    int nro;
+    struct nodo *sig;
+} nodo;
+
+typedef nodo *Tlista;
+
+int main() {
+
+    Tlista n1, n2;
+
+
+    n1 = (Tlista) malloc(sizeof(nodo));
+    n2 = (Tlista) malloc(sizeof(nodo));
+
+    if (n1 == NULL || n2==NULL) {
+        printf("Error de memoria\n");
+
+    } else{
+
+
+    n1->nro = 7;
+    n1->palo = 'C';
+
+    n2->nro = 12;
+    n2->palo = 'E';
+
+    // Enlazar nodos
+    n1->sig = n2;     // n1 apunta a n2
+    n2->sig = NULL;   // último nodo apunta a NULL
+
+
+    printf("Nodo 1: %d %c\n", n1->nro, n1->palo);
+    printf("Nodo 2: %d %c\n", n1->sig->nro, n1->sig->palo);
+
+
+    free(n2);
+    free(n1);
+
+    }
+    return 0;
+}
+
+
+
+
