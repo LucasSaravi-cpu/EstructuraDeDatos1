@@ -1,0 +1,25 @@
+Ej 3. - Dadas las siguientes declaraciones de variables: 
+int vt[15]; Vector estatico
+ int *vt; Puntero a entero
+Indicar que líneas de código le puede corresponder a cada declaración: 
+i. vt = (int *) malloc(sizeof(int) * 15);
+
+solo sirve para int *vt;
+porque malloc reserva memoria dinamica y necesita un puntero en cuanto al vector ya tiene memoria fija
+
+ii. for(i=0;i<15;i++) 
+    scanf("%d",vt+i); 
+
+sirve para ambos por que vt+i == &vt[i] ya que ambos son direcciones de memoria y
+scanf necesita uan direccion por eso no lleva & por que si no es para el valor de elemento
+
+iii.for(i=0;i<15;i++) 
+    printf("vt[%2i] = %d",i , vt[i]); 
+
+sirve para ambos por que vt[i] == *(vt + i)
+
+iv. free(vt); 
+
+solo sirve para int *vt; por que libera memoria dinamica
+
+
