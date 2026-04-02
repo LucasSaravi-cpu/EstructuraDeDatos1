@@ -13,10 +13,17 @@ Software utilizado : CodeBlocks
 ▪ TDA
 
 ▪ ESTRUCTURAS de DATOS (lineales)
+
   ▪ Estructuras: PILAS y COLAS 
+  
   ▪ Estructuras: 
                 ▪ LISTAS SIMPLEMENTE ENLAZADAS
+                
                 ▪ MULTILISTAS
+                
                 ▪ LISTAS DOBLEMENTE ENLAZADAS 
-                ▪ LISTAS CIRCULARES  
+                
+                ▪ LISTAS CIRCULARES 
+
+                
 ▪ ORDEN de ALGORITMOS 
