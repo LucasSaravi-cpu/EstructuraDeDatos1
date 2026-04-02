@@ -17,13 +17,6 @@ Software utilizado : CodeBlocks
   ▪ Estructuras: PILAS y COLAS 
   
   ▪ Estructuras: 
-                ▪ LISTAS SIMPLEMENTE ENLAZADAS
-                
-                ▪ MULTILISTAS
-                
-                ▪ LISTAS DOBLEMENTE ENLAZADAS 
-                
-                ▪ LISTAS CIRCULARES 
+                ▪ LISTAS SIMPLEMENTE ENLAZADAS ,MULTILISTA , LISTAS DOBLEMENTE ENLAZADAS Y LISTAS CIRCULARES 
 
-                
 ▪ ORDEN de ALGORITMOS 
