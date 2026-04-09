@@ -1,13 +1,12 @@
-/*Desarrollar una funci髇 para cargar datos en una matriz A de NxN  elementos de tipo float.
+/*Desarrollar una funci贸n para cargar datos en una matriz A de NxN  elementos de tipo float.
 
-Desarrollar una funci髇 para generar un arreglo V de registros que en cada elemento contenga los siguientes campos: fila y promedio (es el promedio de los valores positivos de la fila). Ignorar las filas de A en las que haya alg鷑 0.
+Desarrollar una funci贸n para generar un arreglo V de registros que en cada elemento contenga los siguientes campos: fila y promedio (es el promedio de los valores positivos de la fila). Ignorar las filas de A en las que haya alg煤n 0.
 
-Desarrollar una funci髇 int que a partir de V devuelva la cantidad de filas que tengan un promedio mayor a K (k dato de entrada).
+Desarrollar una funci贸n int que a partir de V devuelva la cantidad de filas que tengan un promedio mayor a K (k dato de entrada).
 
-Escribir la funci髇 main() con las declaraciones e invocaciones correspondientes. Definir los tipos que considere necesarios.*/
+Escribir la funci贸n main() con las declaraciones e invocaciones correspondientes. Definir los tipos que considere necesarios.*/
 
 #include <stdio.h>
-#include <stdlib.h>
 #define MAX 50
 
 typedef struct {
@@ -16,9 +15,9 @@ typedef struct {
 } Registro;
 
 
-void cargarMatriz(float a[MAX][MAX],int n);
-void generarVector(float a[MAX][MAX], int n, Registro v[MAX], int *cant);
-int contarMayores(Registro v[MAX], int cant, float k);
+void cargarMatriz(float a[][MAX],int n);
+void generarVector(float a[][MAX], int n, Registro v[MAX], int *cant);
+int contarMayores(Registro v[], int cant, float k);
 
 
 int main() {
@@ -27,7 +26,7 @@ int main() {
     int n,cantidad;
     float k;
 
-    printf("Ingresar la dimension del vector ");
+    printf("Ingresar la dimension de la matriz ");
     scanf("%d", &n);
 
     cargarMatriz(a, n);
@@ -38,14 +37,16 @@ int main() {
     scanf("%f", &k);
 
 
-    printf("Cantidad de filas con promedio ", contarMayores(v, cantidad,k));
+    printf("Cantidad de filas con promedio %d", contarMayores(v, cantidad,k));
 
     return 0;
 }
 
 void cargarMatriz(float a[][MAX], int n) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+    int i,j;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+        printf("Ingresar el numero que va en la posicion [%d][%d] \n",i,j);
             scanf("%f", &a[i][j]);
         }
     }
@@ -54,33 +55,36 @@ void cargarMatriz(float a[][MAX], int n) {
 
 void generarVector(float a[][MAX], int n, Registro v[], int *cant) {
     int k = 0;
+    int j;
+    int tieneCero;
+    float suma;
+    int cantPos;
 
     for (int i = 0; i < n; i++) {
-        int tieneCero = 0;
-        float suma = 0;
-        int cantPos = 0;
+
+        j = 0;
+        tieneCero = 0;
+        suma = 0;
+        cantPos = 0;
 
 
-        for (int j = 0; j < n; j++) {
+        while (j < n && tieneCero == 0) {
             if (a[i][j] == 0) {
                 tieneCero = 1;
-            }
-        }
-
-
-        if (tieneCero == 0) {
-            for (int j = 0; j < n; j++) {
+            } else {
                 if (a[i][j] > 0) {
-                    suma +=a[i][j];
+                    suma += a[i][j];
                     cantPos++;
                 }
             }
+            j++;
+        }
 
-            if (cantPos > 0) {
-                v[k].fila = i;
-                v[k].promedio = suma / cantPos;
-                k++;
-            }
+
+        if (tieneCero == 0 && cantPos > 0) {
+            v[k].fila = i;
+            v[k].promedio = suma / cantPos;
+            k++;
         }
     }
 
@@ -89,8 +93,8 @@ void generarVector(float a[][MAX], int n, Registro v[], int *cant) {
 
 int contarMayores(Registro v[], int cant, float k) {
     int contador = 0;
-
-    for (int i = 0; i < cant; i++) {
+    int i;
+    for (i = 0; i < cant; i++) {
         if (v[i].promedio > k) {
             contador++;
         }
