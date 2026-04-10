@@ -1,3 +1,25 @@
+/*a) Desarrollar un programa que lea los datos de dos personas, en variables dinámicas (tipo 
+struct), y muestre el nombre del más joven. Utilizar las siguientes declaraciones que deben 
+estar en el archivo tipos.h: 
+typedef struct { 
+char Nombre[21]; 
+int  
+Edad; 
+} strPersona; 
+typedef strPersona * ptPersona; 
+b) Modificar el tipo strPersona del inciso a.- agregando un campo sig de tipo puntero a 
+strPersona.  
+Enlazar pt1 con pt2, haciendo que pt2 sea el siguiente de pt1 y que pt2 no tenga           
+siguiente. 
+c) Dados los datos cargados en a.- y los enlaces efectuados en b.-, indicar si son correctas o 
+no las siguientes sentencias y en caso de ser correctas indicar el efecto que producen: 
+i. printf("%d", pt1.Edad); 
+ii.  printf("%s", pt1->sig->Nombre);
+iii. pt1->sig = pt1; 
+iv. pt2->sig = pt1->sig; 
+v. pt1->Nombre = pt1->sig->Nombre;*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "tipos.h"
@@ -21,7 +43,7 @@ int main() {
     scanf("%d", &pt2->Edad);
 
 
-    //Se enlasa
+    //Se enlasa Ejercicio B
     /*pt1->sig = pt2;
     pt2->sig = NULL;*/
 
@@ -38,3 +60,14 @@ int main() {
 
     return 0;
 }
+
+
+
+/*Ejercicio C
+
+i) printf("%d", pt1.Edad); incorrecta pt1 es puntero → se usa ->, no . Correcta : printf("%d", pt1->Edad);
+ii)printf("%s", pt1->sig->Nombre); es correcta accede al siguiente nodo ( pt2 ) imprime su nombre
+iii)pt1->sig = pt1; Correcta pt1 se aputa a si mismo se genera una lista circular de un solo nodo puede provocar bocles infinitos si recorres la lista 
+iv)pt2->sig = pt1->sig; pt2->sig pasa a apuntar a lo mismo que pt1->sig
+v)pt1->Nombre = pt1->sig->Nombre; incorrecta no se puede asigar arrays en c directamente Correcto strcpy(pt1->Nombre, pt1->sig->Nombre);
+ */
