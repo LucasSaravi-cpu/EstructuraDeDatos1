@@ -22,7 +22,7 @@ int main() {
     else {
         min = minimo(v, n - 1);
 
-        if (v[n] < min)
+        if (v[n] < min)  // A la vuelta de la recursividad va comprando 
             return v[n];
         else
             return min;
