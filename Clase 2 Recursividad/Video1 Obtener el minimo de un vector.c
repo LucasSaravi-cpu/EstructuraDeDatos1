@@ -14,7 +14,7 @@ int main() {
     return 0;
 }
 
- {
+ int minimo(int v[], int n){
     int min;
 
     if (n == 0)
@@ -27,4 +27,4 @@ int main() {
         else
             return min;
     }
-}
+ }
