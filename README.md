@@ -1,22 +1,23 @@
-# Programacion en C -
+# Programacion en C 
 
-**Proyecto utilizado a modo de ejercitación**
+##**Proyecto utilizado a modo de ejercitación**
 
-Software utilizado : CodeBlocks
+###Software utilizado : CodeBlocks
 
 ## Temas explicados e implementados en diversos ejercicios
 
-▪ REPASO LENGUAJE C y MTDAEMORIA DINAMICA 
+`Repaso lengauje C y memoria dinamica`
 
-▪ RECURSIVIDAD
+`Recursividad`
 
-▪ TDA
+`TDA`
 
-▪ ESTRUCTURAS de DATOS (lineales)
+`Estrucutras de datos ( lineales ) : Pilas y Colas `
 
-  ▪ Estructuras: PILAS y COLAS 
-  
-  ▪ Estructuras: 
-                ▪ LISTAS SIMPLEMENTE ENLAZADAS ,MULTILISTA , LISTAS DOBLEMENTE ENLAZADAS Y LISTAS CIRCULARES 
+`Estructuras : Lista simplemente enlazadas , multilista , Lista doblemente enlazadas y listas circulares`
 
-▪ ORDEN de ALGORITMOS 
+`Orden de algoritmos`
+
+
+
+
