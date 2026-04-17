@@ -1,10 +1,10 @@
 # Programacion en C 
 
-## **Proyecto utilizado a modo de ejercitación**
+ **Proyecto utilizado a modo de ejercitación**
 
-### Software utilizado : CodeBlocks
+**Software utilizado : CodeBlocks**
 
-## Temas explicados e implementados en diversos ejercicios
+### Temas explicados e implementados en diversos ejercicios
 
 `Repaso lengauje C y memoria dinamica`
 
