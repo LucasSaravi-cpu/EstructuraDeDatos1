@@ -1,8 +1,8 @@
 # Programacion en C 
 
-##**Proyecto utilizado a modo de ejercitación**
+## **Proyecto utilizado a modo de ejercitación**
 
-###Software utilizado : CodeBlocks
+### Software utilizado : CodeBlocks
 
 ## Temas explicados e implementados en diversos ejercicios
 
