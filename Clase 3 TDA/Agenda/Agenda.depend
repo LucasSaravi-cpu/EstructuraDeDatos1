@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1777217046 source:c:\users\user\desktop\agenda\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Contacto.h"
+
+1777216589 c:\users\user\desktop\agenda\contacto.h
+
+1777216561 source:c:\users\user\desktop\agenda\contacto.c
+	<stdio.h>
+	<string.h>
+	"Contacto.h"
+
