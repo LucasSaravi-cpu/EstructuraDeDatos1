@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1777174309 source:c:\users\user\desktop\complejos\main.c
+	<stdio.h>
+	<stdlib.h>
+	"complejos.h"
+
+1777174092 c:\users\user\desktop\complejos\complejos.h
+
+1777174217 source:c:\users\user\desktop\complejos\complejos.c
+	"complejos.h"
+	<stdio.h>
+
