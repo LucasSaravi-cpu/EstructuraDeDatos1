@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1777214627 source:c:\users\user\desktop\circunferencia\circun.c
+	<stdio.h>
+	<stdlib.h>
+	"Circun.h"
+
+1777214131 c:\users\user\desktop\circunferencia\circun.h
+
+1777214632 source:c:\users\user\desktop\circunferencia\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Circun.h"
+
