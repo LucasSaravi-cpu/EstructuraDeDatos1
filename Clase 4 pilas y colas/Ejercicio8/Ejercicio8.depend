@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1777645632 source:c:\users\user\desktop\ejercicio8\colas.c
+	"Colas.h"
+	<stdio.h>
+	<stdlib.h>
+
+1777645581 c:\users\user\desktop\ejercicio8\colas.h
+
+1777645632 source:c:\users\user\desktop\ejercicio8\pilas.c
+	<stdio.h>
+	<stdlib.h>
+	"Pilas.h"
+
+1777645581 c:\users\user\desktop\ejercicio8\pilas.h
+
+1777645944 source:c:\users\user\desktop\ejercicio8\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Pilas.h"
+	"Colas.h"
+
