@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1777659265 source:c:\users\user\desktop\ejercicio10\colas.c
+	"Colas.h"
+	<stdio.h>
+	<stdlib.h>
+
+1777659265 c:\users\user\desktop\ejercicio10\colas.h
+
