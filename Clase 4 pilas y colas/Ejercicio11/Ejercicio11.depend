@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1777671671 source:c:\users\user\desktop\ejercicio11\colas.c
+	"Colas.h"
+	<stdio.h>
+	<stdlib.h>
+
+1777671671 c:\users\user\desktop\ejercicio11\colas.h
+
+1777672666 source:c:\users\user\desktop\ejercicio11\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Colas.h"
+
