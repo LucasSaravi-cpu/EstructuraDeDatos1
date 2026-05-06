@@ -9,4 +9,11 @@ struct nodop *sig; // puntero a otro nodop, que debera apuntar siempre al nodo q
 typedef nodop *TPila;//otro puntero a nodop, pero el mas importante, ya que este representa la pila, siendo la cabeza
 //es decir, el puntero que apunta al ultimo nodo creado
 
+
+void poneP(TPila *P, ElementoP x);
+void sacaP(TPila *P, ElementoP * x);
+ElementoP consultaP(TPila P);
+int VaciaP(TPila P);
+void IniciaP (TPila *P);
+
 #endif // PILAS_H_INCLUDED
