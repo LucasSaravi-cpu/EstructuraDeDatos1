@@ -1,7 +1,7 @@
 #ifndef COLAS_H_INCLUDED
 #define COLAS_H_INCLUDED
 typedef int TElementoC;
-typedef struct {
+typedef struct nodo{
     TElementoC dato;
     struct nodo * sig;
  }nodo;
