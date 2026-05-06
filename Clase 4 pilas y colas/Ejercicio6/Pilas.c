@@ -23,4 +23,9 @@ void sacaP(TPila *P, ElementoP *x) {
     free(aux);
 }
 
+ElementoP* consultaP(TPila P) { //consulta ,no modifica
+    //y devuelve el tipo de elemento que almacene
+if (P!= NULL) //si la cabeza apunta a algo
+ return P->dato; //devuelve el dato que haya en el interior de la cabeza de la pila
+}
 
