@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1778100360 source:c:\users\fasta\desktop\ejercicio12\pilas.c
+	"Pilas.h"
+	<stdio.h>
+	<stdlib.h>
+
+1778100360 c:\users\fasta\desktop\ejercicio12\pilas.h
+
+1778102267 source:c:\users\fasta\desktop\ejercicio12\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Pilas.h"
+
