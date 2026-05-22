@@ -1,6 +1,10 @@
-Listas SE - Recorrido
+/*Listas SE - Recorrido
 
-Dada una lista simplemente enlazada de cadenas, retornar la cantidad que tienen longitud par
+Dada una lista simplemente enlazada de cadenas, retornar la cantidad que tienen longitud par*/
+
+/*Importante: cada vez que se realiza una inserciÃ³n o eliminaciÃ³n en una lista enlazada, 
+siempre se debe verificar si el nodo involucrado se encuentra al principio de la lista,
+ya que en ese caso serÃ¡ necesario actualizar el puntero inicial de la misma.*/
 
 
 
@@ -28,9 +32,9 @@ int CantPares (TLista L){
 }
 
 
-Listas SE - Búsqueda
+/*Listas SE - BÃºsqueda
 
-Dada una lista simplemente enlazada de cadenas, verificar si X está
+Dada una lista simplemente enlazada de cadenas, verificar si X estÃ¡*/
 
 
 int esta (TLista L, char *x){
@@ -44,7 +48,7 @@ int esta (TLista L, char *x){
     return aux != NULL;
 }
 
-Dada una lista simplemente enlazada ordenada de cadenas, verificar si X está
+/*Dada una lista simplemente enlazada ordenada de cadenas, verificar si X estÃ¡*/
 
 
 int estaOrd (TListaE L, char *x){
@@ -58,9 +62,9 @@ int estaOrd (TListaE L, char *x){
     return aux != NULL && strcmp(x, aux->dato) == 0;
 }
 
-Listas SE - Inserción
+/*Listas SE - InserciÃ³n
 
-Insertar un dato en una lista ordenada simplemente enlazada de entero
+Insertar un dato en una lista ordenada simplemente enlazada de entero*/
 
 
 void insertaOrd (TListaE *L, int x){
@@ -87,9 +91,9 @@ void insertaOrd (TListaE *L, int x){
     }
 }
 
-Listas SE - Eliminación
+/*Listas SE - EliminaciÃ³n
 
-Dada una lista ordenada simplemente enlazada de enteros, eliminar X
+Dada una lista ordenada simplemente enlazada de enteros, eliminar X*/
 
 
 void eliminaE(TListaE *L, int x){
