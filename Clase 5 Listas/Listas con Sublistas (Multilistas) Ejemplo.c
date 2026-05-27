@@ -62,7 +62,6 @@ void cargarBarcos(TListaB *LB);
 void envios(TListaC *LC, TListaB LB);
 void mostrarBarcos(TListaB LB);
 void mostrarContenedoresNoDespachados(TListaC LC);
-void destruirListas(TListaC *LC, TListaB *LB);
 
 
 int main() {
