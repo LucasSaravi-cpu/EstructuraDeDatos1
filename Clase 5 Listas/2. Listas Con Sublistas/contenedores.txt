@@ -1,0 +1,5 @@
+C001 NuevaYork 10.5
+C002 Londres 8.2
+C003 NuevaYork 15.0
+C004 Sidney 20.0
+C005 Londres 5.5
