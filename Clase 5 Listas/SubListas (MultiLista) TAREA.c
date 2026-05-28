@@ -24,34 +24,22 @@ d.- Eliminar de la lista los clientes que ya no tienen deuda.*/
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct nodito {
+    char fecha[9];
+    float imp;
+    struct nodito * sig;
+} nodito;
 
-typedef struct pago{
+typedef nodito * SubLista;
 
-    char fecha[15];
-    float importe;
-    struct pago *sig;
-    struct pago *ant;
-
-} pago;
-
-typedef struct pago *SubLista;
-
-
-typedef struct cliente{
-
-    int nroCli;
-
-    float totalCredito;
-    float adeudado;
-
-    struct cliente *sig;
-    struct cliente *ant;
-
+typedef struct nodoC {
+    int numC;
+    float cred, deuda;
+    struct nodoC * sig;
     SubLista sub;
+} nodoC;
 
-} cliente;
-
-typedef struct cliente *TListaC;
+typedef nodoC * TListaC;
 
 
 void insertarCliente(TListaC *LC,int nro,float total,float adeudado);
@@ -81,7 +69,7 @@ int main(){
     mostrarLista(LC);
 
 
-    insertarPago(LC,100,"2026-07-30",5000);
+    insertarPago(LC,100,"20260730",5000);
 
     printf("\nDESPUES DE INSERTAR PAGO \n");
 
@@ -89,13 +77,13 @@ int main(){
 
 
 
-    eliminarPago(LC,100,"2026-07-15");
+    eliminarPago(LC,100,"20260715");
 
     printf("\nDESPUES DE ELIMINAR PAGO \n");
 
     mostrarLista(LC);
 
-    eliminarCliente(&LC,300);
+    eliminarCliente(&LC,100);
 
     printf("\nDESPUES DE ELIMINAR CLIENTE \n");
 
@@ -117,51 +105,35 @@ int main(){
 
 void insertarCliente(TListaC *LC,int nro,float total,float adeudado){
 
-    TListaC aux, ant, act;
+    TListaC nuevo, act, ant;
 
-    aux = (TListaC) malloc(sizeof(cliente));
+    nuevo = (TListaC) malloc(sizeof(nodoC));
 
-    aux->nroCli = nro;
-    aux->totalCredito = total;
-    aux->adeudado = adeudado;
+    nuevo->numC = nro;
+    nuevo->cred = total;
+    nuevo->deuda = adeudado;
+    nuevo->sub = NULL;
 
-    aux->sub = NULL;
+    ant = NULL;
+    act = *LC;
 
-    /* INSERTAR AL PRINCIPIO */
+    while(act != NULL && act->numC < nro){
 
-    if(*LC == NULL ||
-       nro < (*LC)->nroCli){
-
-        aux->sig = *LC;
-        aux->ant = NULL;
-
-        if(*LC != NULL)
-            (*LC)->ant = aux;
-
-        *LC = aux;
+        ant = act;
+        act = act->sig;
     }
 
+    nuevo->sig = act;
+
+    /* SI INSERTA AL PRINCIPIO */
+
+    if(ant == NULL){
+
+        *LC = nuevo;
+    }
     else{
 
-        ant = NULL;
-        act = *LC;
-
-        while(act != NULL &&
-              nro > act->nroCli){
-
-            ant = act;
-            act = act->sig;
-        }
-
-        aux->sig = act;
-        aux->ant = ant;
-
-        ant->sig = aux;
-
-        /* SI NO ESTA AL FINAL */
-
-        if(act != NULL)
-            act->ant = aux;
+        ant->sig = nuevo;
     }
 }
 
@@ -203,7 +175,7 @@ void cargarPagos(TListaC LC){
     FILE *arch;
 
     int nro;
-    char fecha[15];
+    char fecha[9];
     float importe;
 
     arch = fopen("pagos.txt", "r");
@@ -235,16 +207,16 @@ void insertarPago(TListaC L,int nro,char fecha[],float imp){
     while(aux->numC != nro){
 
         aux = aux->sig;
-//encuentro al cliente 
-    }
 
+    }
+//encuentro al cliente
         nuevo = (SubLista) malloc(sizeof(nodito));
 
         strcpy(nuevo->fecha, fecha);
         nuevo->imp= imp;
         aux->deuda-=imp;
 
-    
+
 
         if(aux->sub == NULL ||strcmp(fecha, aux->sub->fecha) > 0){
 
@@ -254,10 +226,10 @@ void insertarPago(TListaC L,int nro,char fecha[],float imp){
 
             acts= aux->sub;
 
-        while (acts!=NULL && strcmp( fecha , ants->fecha <0) {
+        while (acts!=NULL && strcmp( fecha , ants->fecha <0)){
             acts= ants;
             acts=acts->sig;
-        }       
+        }
 
             nuevo->sig = acts;
             ants->sig= nuevo;
@@ -273,7 +245,7 @@ void mostrarPagos(SubLista sub){
                sub->fecha);
 
         printf("      Importe: %.2f\n",
-               sub->importe);
+               sub->imp);
 
         sub = sub->sig;
     }
@@ -289,13 +261,13 @@ void mostrarLista(TListaC LC){
         printf("\n--------------\n");
 
         printf("CLIENTE: %d\n",
-               LC->nroCli);
+               LC->numC);
 
         printf("TOTAL CREDITO: %.2f\n",
-               LC->totalCredito);
+               LC->cred);
 
         printf("ADEUDADO: %.2f\n",
-               LC->adeudado);
+               LC->deuda);
 
         printf("PAGOS:\n");
 
@@ -326,12 +298,12 @@ void eliminarPago(TListaC L,int nro,char fecha[]){
 
         aux= aux->sig;
     }
-    if(aux != NULL && strcmp (acts->fecha,fecha)>0){
+    if(aux!= NULL && aux->numC ==nro ){
 
         ants = NULL;
         acts = aux->sub;
 
-        while(aux != NULL &&strcmp(aux->fecha,fecha) >0){
+        while(acts != NULL && strcmp(acts->fecha,fecha) >0){
 
             ants=acts;
             acts= acts->sig;
@@ -340,7 +312,7 @@ void eliminarPago(TListaC L,int nro,char fecha[]){
         if(acts != NULL){
 
             aux->deuda += acts->imp;
-        
+
 
             if(ants == NULL){
 
@@ -349,7 +321,7 @@ void eliminarPago(TListaC L,int nro,char fecha[]){
 
             else{
 
-                ants->sub = acts->sig;
+                ants->sig = acts->sig;
 
             }
 
@@ -365,8 +337,9 @@ void eliminarPago(TListaC L,int nro,char fecha[]){
 void eliminarCliente(TListaC *L, int nro){
 
     TListaC aux= *L;
+    TListaC ant;
 
-    Sublista auxs;
+    SubLista auxs;
 
     while(aux != NULL &&aux->numC != nro){
 
@@ -376,23 +349,21 @@ void eliminarCliente(TListaC *L, int nro){
 
     if(aux != NULL && aux -> numC==nro){
 
-        while ( aux->sub!=NULL){ 
-        
+        while ( aux->sub!=NULL){ // Eliminar nodo por nodo
+
         auxs=aux->sub;
-        aux->sub = auxS->sig;
-         free(auxs);   
-        
+        aux->sub = auxs->sig;
+         free(auxs);
+
         }
 
     if ( aux == *L){
 
-*L= aux ->sig ;
-    } else { 
+        *L= aux ->sig ;
+    } else {
         ant->sig=aux->sig;
     }
-        
-        
-      
+
 free(aux);
     }
 }
@@ -401,47 +372,34 @@ free(aux);
 /*d.- Eliminar de la lista los clientes que ya no tienen deuda.*/
 
 
-void eliminarSinDeuda(TListaC *LC){
+void eliminarSinDeuda(TListaC *L){
+    TListaC aux = *L;
+    SubLista auxs;
+     TListaC ant;
 
-    TListaC ant, aux, elim;
+    while ( aux!=NULL && aux->deuda !=0){
 
-    ant = NULL;
-    aux = *LC;
+        ant=aux;
+        aux=aux->sig;
 
-    while(aux != NULL){
+    }
 
-        if(aux->adeudado == 0){
+    if (aux!=NULL && aux->deuda==0){
 
-            elim = aux;
-            aux = aux->sig;
+        while (aux ->sub!=NULL){
 
-            /* SI ESTA AL PRINCIPIO */
-
-            if(elim == *LC){
-
-                *LC = aux;
-
-                if(*LC != NULL)
-                    (*LC)->ant = NULL;
-            }
-
-            else{
-
-                ant->sig = aux;
-
-                /* SI NO ESTA AL FINAL */
-
-                if(aux != NULL)
-                    aux->ant = ant;
-            }
-
-            free(elim);
+        auxs = aux->sub;
+        aux->sub = auxs->sig;
+        free(auxs);
         }
+        if (aux==*L){
 
+            *L=aux->sig;
+        }
         else{
 
-            ant = aux;
-            aux = aux->sig;
+            ant->sig=aux->sig;
+        }
+        free(aux);
         }
     }
-}
