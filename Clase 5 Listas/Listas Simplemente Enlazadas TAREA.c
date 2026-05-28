@@ -1,204 +1,406 @@
-/*TAREAS*/
+/*Aquí tienes la transcripción completa del texto de la imagen:
+
+Se tiene una lista de clientes que registran pagos de un crédito con el siguiente diseño:
+
+Numero de Cliente                (no se repite, ordenada ascendente)
+
+Total Credito en $
+
+Adeudado en $
+
+Sublista de Pagos
+
+Fecha (ordenada descendente, no se repite)
+
+Importe
+
+Se pide:
+a.- Dado un número de cliente correcto, una fecha y un importe, insertar el pago actualizando el valor adeudado.
+b.- Dado un número de cliente y una fecha, eliminar el pago (si existe) actualizando el valor adeudado.
+c.- Dado un número de cliente, eliminarlo de la lista
+d.- Eliminar de la lista los clientes que ya no tienen deuda.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct nodito {
+    char fecha[9];
+    float imp;
+    struct nodito * sig;
+} nodito;
+
+typedef nodito * SubLista;
+
+typedef struct nodoC {
+    int numC;
+    float cred, deuda;
+    struct nodoC * sig;
+    SubLista sub;
+} nodoC;
+
+typedef nodoC * TListaC;
+
+
+void insertarCliente(TListaC *LC,int nro,float total,float adeudado);
+void insertarPago(TListaC LC,int nro,char fecha[],float imp);
+void cargarPagos(TListaC LC);
+void cargarClientes(TListaC *LC);
+void mostrarPagos(SubLista sub);
+void mostrarLista(TListaC LC);
+void eliminarSinDeuda(TListaC *LC);
+void eliminarCliente(TListaC *LC, int nro);
+void eliminarPago(TListaC LC,int nro,char fecha[]);
 
 
 
 
+int main(){
+
+    TListaC LC = NULL;
+
+
+    cargarClientes(&LC);
+
+    cargarPagos(LC);
+
+    printf("\n LISTA ORIGINAL \n");
+
+    mostrarLista(LC);
+
+
+    insertarPago(LC,100,"20260730",5000);
+
+    printf("\nDESPUES DE INSERTAR PAGO \n");
+
+    mostrarLista(LC);
 
 
 
-/*1) Dada una lista simplemente enlazada de enteros, sumar el valor de los K primeros nodos*/
+    eliminarPago(LC,100,"20260715");
 
-int suma (TlistaE L , int k ) {
-	int suma =0;
-	int i=0;
-	
-	TlistaE aux;
-	aux=L;
-	
-	while ( aux!=NULL && i<k) {
-	     suma += aux->dato;
-         aux = aux->sig;
-         i++;
-	}
-return suma ;	
-		
-	}
-	
-/*2) Dada una lista de enteros modificar cada aparición de X por X+1*/
+    printf("\nDESPUES DE ELIMINAR PAGO \n");
 
-void remplazar (Tlista L , int x ) {
-	
-Tlista aux =L;
+    mostrarLista(LC);
 
-while ( aux!=NULL ) {
-   if (aux -> dato == x ) 
-	   (aux->)++;
-   aux = aux -> sig;
-}	
-	
+    eliminarCliente(&LC,100);
+
+    printf("\nDESPUES DE ELIMINAR CLIENTE \n");
+
+    mostrarLista(LC);
+
+
+    eliminarSinDeuda(&LC);
+
+    printf("\nLISTA FINAL \n");
+
+    mostrarLista(LC);
+
+    return 0;
 }
 
 
-/*3) Destruir una lista simplemente enlazada*/
 
-void DestruirLista ( Tlista *L) {
 
-Tlista aux;
 
-while ( *L!=NULL ) {
-	
-	aux = *L ;
-	*L = (*L)->sig;
-	free(aux);
+void insertarCliente(TListaC *LC,int nro,float total,float adeudado){
+
+    TListaC nuevo, act, ant;
+
+    nuevo = (TListaC) malloc(sizeof(nodoC));
+
+    nuevo->numC = nro;
+    nuevo->cred = total;
+    nuevo->deuda = adeudado;
+    nuevo->sub = NULL;
+
+    ant = NULL;
+    act = *LC;
+
+    while(act != NULL && act->numC < nro){
+
+        ant = act;
+        act = act->sig;
+    }
+
+    nuevo->sig = act;
+
+    /* SI INSERTA AL PRINCIPIO */
+
+    if(ant == NULL){
+
+        *LC = nuevo;
+    }
+    else{
+
+        ant->sig = nuevo;
+    }
 }
 
+
+
+
+
+
+void cargarClientes(TListaC *LC){
+
+    FILE *arch;
+
+    int nro;
+    float total;
+    float adeudado;
+
+    arch = fopen("clientes.txt", "r");
+
+    if(arch == NULL){
+
+        printf("Error al abrir clientes.txt\n");
+
+    }else{
+
+    while(fscanf(arch,"%d %f %f",&nro,&total,&adeudado) == 3){
+
+        insertarCliente(LC,nro,total,adeudado);
+    }
+    }
+
+    fclose(arch);
 }
 
 
-/*4) Eliminar todas las apariciones de X de una lista simplemente enlazada de enteros ORDENADA*/
 
-void eliminaE(TListaE *L, int x){
 
-    TListaE ant, act;
+void cargarPagos(TListaC LC){
 
-    if (*L != NULL)
+    FILE *arch;
 
-        /* IMPORTANTE:
-           siempre hay que verificar
-           si el nodo está al principio */
+    int nro;
+    char fecha[9];
+    float importe;
 
-        while (*L != NULL && (*L)->dato == x){
-            act = *L;
-            *L = (*L)->sig;
-            free(act);
+    arch = fopen("pagos.txt", "r");
+
+    if(arch == NULL){
+
+        printf("Error al abrir pagos.txt\n");
+
+    }else{
+
+    while(fscanf(arch,"%d %s %f",&nro,fecha,&importe) == 3){
+
+        insertarPago(LC,nro,fecha,importe);
+    }
+    }
+    fclose(arch);
+}
+
+
+
+/*a.- Dado un número de cliente correcto, una fecha y un importe, insertar el pago actualizando el valor adeudado.*/
+
+void insertarPago(TListaC L,int nro,char fecha[],float imp){
+
+    TListaC aux =L;
+
+    SubLista nuevo,acts,ants;
+
+    while(aux->numC != nro){
+
+        aux = aux->sig;
+
+    }
+//encuentro al cliente
+        nuevo = (SubLista) malloc(sizeof(nodito));
+
+        strcpy(nuevo->fecha, fecha);
+        nuevo->imp= imp;
+        aux->deuda-=imp;
+
+
+
+        if(aux->sub == NULL ||strcmp(fecha, aux->sub->fecha) > 0){
+
+            nuevo->sig = aux->sub;
+            aux->sub= nuevo ;
+        }else{
+
+            acts= aux->sub;
+
+        while (acts!=NULL && strcmp( fecha , ants->fecha <0)){
+            acts= ants;
+            acts=acts->sig;
         }
 
-    if (*L != NULL){
+            nuevo->sig = acts;
+            ants->sig= nuevo;
+    }
+}
 
-        ant = *L;
-        act = (*L)->sig;
 
-        while (act != NULL && act->dato <= x){
+void mostrarPagos(SubLista sub){
 
-            if (act->dato == x){
+    while(sub != NULL){
 
-                ant->sig = act->sig;
-                free(act);
+        printf("      Fecha: %s\n",
+               sub->fecha);
 
-                act = ant->sig;
+        printf("      Importe: %.2f\n",
+               sub->imp);
+
+        sub = sub->sig;
+    }
+}
+
+
+
+
+void mostrarLista(TListaC LC){
+
+    while(LC != NULL){
+
+        printf("\n--------------\n");
+
+        printf("CLIENTE: %d\n",
+               LC->numC);
+
+        printf("TOTAL CREDITO: %.2f\n",
+               LC->cred);
+
+        printf("ADEUDADO: %.2f\n",
+               LC->deuda);
+
+        printf("PAGOS:\n");
+
+        if(LC->sub == NULL)
+            printf("      Sin pagos\n");
+
+        else
+            mostrarPagos(LC->sub);
+
+        LC = LC->sig;
+    }
+}
+
+
+/*b.- Dado un número de cliente y una fecha, eliminar el pago (si existe) actualizando el valor adeudado.*/
+
+
+
+
+void eliminarPago(TListaC L,int nro,char fecha[]){
+
+    TListaC aux=L;
+
+    SubLista ants,acts;
+
+
+    while(aux!= NULL &&aux->numC != nro){
+
+        aux= aux->sig;
+    }
+    if(aux!= NULL && aux->numC ==nro ){
+
+        ants = NULL;
+        acts = aux->sub;
+
+        while(acts != NULL && strcmp(acts->fecha,fecha) >0){
+
+            ants=acts;
+            acts= acts->sig;
+        }
+
+        if(acts != NULL){
+
+            aux->deuda += acts->imp;
+
+
+            if(ants == NULL){
+
+                aux->sub = acts->sig;;
             }
+
             else{
-                ant = act;
-                act = act->sig;
+
+                ants->sig = acts->sig;
+
             }
-        }
-    }
-}
 
-/*5) Eliminar todas las apariciones de X de una lista simplemente enlazada ordenada de enteros SIN ORDENAR */
-void eliminaE(TListaE *L, int x){
-
-    TListaE ant, act;
-
-    if (*L != NULL)
-
-        /* IMPORTANTE:
-           siempre hay que verificar
-           si el nodo está al principio */
-
-        while (*L != NULL && (*L)->dato == x){
-            act = *L;
-            *L = (*L)->sig;
-            free(act);
-        }
-
-    if (*L != NULL){
-
-        ant = *L;
-        act = (*L)->sig;
-
-        while (act != NULL){
-
-            if (act->dato == x){
-
-                ant->sig = act->sig;
-                free(act);
-
-                act = ant->sig;
-            }
-            else{
-                ant = act;
-                act = act->sig;
-            }
+            free(acts);
         }
     }
 }
 
 
-/*/*DIFERENCIAS ENTRE LOS EJERCICIOS 4 Y 5
+/*c.- Dado un número de cliente, eliminarlo de la lista*/
 
-En la lista ORDENADA el recorrido se realiza
-hasta encontrar un valor mayor que X, porque
-a partir de ese momento ya se sabe que no
-pueden existir más apariciones de X.
 
-En cambio, en la lista SIN ORDENAR es necesario
-recorrer toda la lista, ya que X puede aparecer
-en cualquier posición.
+void eliminarCliente(TListaC *L, int nro){
 
-Además, al comienzo se utiliza un while para
-verificar si existen varias apariciones consecutivas
-de X en la cabeza de la lista y eliminarlas todas.
-*/
+    TListaC aux= *L;
+    TListaC ant;
 
-/*6) Dada una lista de cadenas eliminar los nodos que contengan cadenas que comiencen con vocal, informar cuantos se han eliminado*/
+    SubLista auxs;
 
-int eliminarVocales(TListaC *L){
+    while(aux != NULL &&aux->numC != nro){
 
-    TListaC ant, act;
-    int cont = 0;
-
-    while (*L != NULL &&
-          ((*L)->cad[0] == 'a' || (*L)->cad[0] == 'e' ||
-           (*L)->cad[0] == 'i' || (*L)->cad[0] == 'o' ||
-           (*L)->cad[0] == 'u' || (*L)->cad[0] == 'A' ||
-           (*L)->cad[0] == 'E' || (*L)->cad[0] == 'I' ||
-           (*L)->cad[0] == 'O' || (*L)->cad[0] == 'U')){
-
-        act = *L;
-        *L = (*L)->sig;
-
-        free(act);
-        cont++;
+        ant = aux;
+        aux = aux->sig;
     }
 
-    if (*L != NULL){
+    if(aux != NULL && aux -> numC==nro){
 
-        ant = *L;
-        act = (*L)->sig;
+        while ( aux->sub!=NULL){ // Eliminar nodo por nodo
 
-        while (act != NULL){
+        auxs=aux->sub;
+        aux->sub = auxs->sig;
+         free(auxs);
 
-            if (act->cad[0] == 'a' || act->cad[0] == 'e' ||
-                act->cad[0] == 'i' || act->cad[0] == 'o' ||
-                act->cad[0] == 'u' || act->cad[0] == 'A' ||
-                act->cad[0] == 'E' || act->cad[0] == 'I' ||
-                act->cad[0] == 'O' || act->cad[0] == 'U'){
+        }
 
-                ant->sig = act->sig;
+    if ( aux == *L){
 
-                free(act);
+        *L= aux ->sig ;
+    } else {
+        ant->sig=aux->sig;
+    }
 
-                act = ant->sig;
+free(aux);
+    }
+}
 
-                cont++;
-            }
-            else{
-                ant = act;
-                act = act->sig;
-            }
+
+/*d.- Eliminar de la lista los clientes que ya no tienen deuda.*/
+
+
+void eliminarSinDeuda(TListaC *L){
+    TListaC aux = *L;
+    SubLista auxs;
+     TListaC ant;
+
+    while ( aux!=NULL && aux->deuda !=0){
+
+        ant=aux;
+        aux=aux->sig;
+
+    }
+
+    if (aux!=NULL && aux->deuda==0){
+
+        while (aux ->sub!=NULL){
+
+        auxs = aux->sub;
+        aux->sub = auxs->sig;
+        free(auxs);
+        }
+        if (aux==*L){
+
+            *L=aux->sig;
+        }
+        else{
+
+            ant->sig=aux->sig;
+        }
+        free(aux);
         }
     }
 
-    return cont;
-}
