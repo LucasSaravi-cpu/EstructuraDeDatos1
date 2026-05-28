@@ -1,3 +1,0 @@
-B001 NuevaYork 25.0
-B002 Londres 10.0
-B003 Sidney 18.0
