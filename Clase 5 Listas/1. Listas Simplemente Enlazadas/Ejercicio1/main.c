@@ -37,7 +37,7 @@ void modificarEdadDNI(Lista L, int dniBuscado, int nuevaEdad);
 void modificarEdadPosicion(Lista L, int posicion, int nuevaEdad);
 void eliminarPosicion(Lista *L, int posicion);
 void eliminarDNI(Lista *L, int dniBuscado);
-void eliminarDNI(Lista *L, int dniBuscado);
+
 
 
 // Al recorrer una lista usando posiciones, normalmente se utiliza:
@@ -97,27 +97,6 @@ void cargarLista(Lista *L){
         fscanf(arch,"%s %d %d",nombreyapellido,&dni,&edad);
        insertarOrdenado(L, nombreyapellido, dni, edad);
     }
-
-   /* int i;
-
-    for(i = 0; i < N; i++){
-
-        printf("\nPersona %d\n", i + 1);
-
-        printf("Nombre y apellido: ");
-        scanf("%s", nombreyapellido);
-
-        printf("DNI: ");
-        scanf("%d", &dni);
-
-        printf("Edad: ");
-        scanf("%d", &edad);
-
-        insertarOrdenado(L, nombreyapellido, dni, edad);
-    }*/
-
-
-
 
 }
 
@@ -241,7 +220,7 @@ void eliminarPosicion(Lista *L, int posicion){
 
     }
 }
-
+ /*ii) recibiendo el DNI del dato a eliminar*/
 
 void eliminarDNI(Lista *L, int dniBuscado){
 
