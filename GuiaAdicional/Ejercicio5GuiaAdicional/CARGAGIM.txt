@@ -1,0 +1,10 @@
+1 Yoga 10 30 0
+2 Spinning 15 25 0
+3 Musculacion 20 40 0
+4 Pilates 12 20 0
+5 Crossfit 25 35 0
+6 Zumba 18 30 0
+7 Funcional 30 28 0
+8 Boxeo 22 25 0
+9 Natacion 35 50 0
+10 Running 28 40 0

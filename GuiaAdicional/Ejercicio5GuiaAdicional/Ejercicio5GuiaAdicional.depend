@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1780521540 source:c:\users\profesor\desktop\ejercicio5guiaadicional\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1780628209 source:c:\users\user\desktop\ejercicio5guiaadicional\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Colas.h"
+
+1780604787 source:c:\users\user\desktop\ejercicio5guiaadicional\colas.c
+	"Colas.h"
+	<stdlib.h>
+
+1780604787 c:\users\user\desktop\ejercicio5guiaadicional\colas.h
+
