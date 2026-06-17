@@ -1,29 +1,29 @@
-/*Ej 5) En un gimnasio, sus actividades para sus socios est·n en una lista con sublistas en la
+/*Ej 5) En un gimnasio, sus actividades para sus socios est√°n en una lista con sublistas en la
 que cada nodo representa una actividad o clase, con los siguientes campos:
-CÛdigo de actividad (0 a 40 - ordenada), Nombre de actividad (cadena de 15), Legajo de
-Profesor (0 a 99), Capacidad m·xima, Cantidad de socios inscriptos y una SubLista con los
-n˙meros de socios (0 a 299) inscriptos.
+C√≥digo de actividad (0 a 40 - ordenada), Nombre de actividad (cadena de 15), Legajo de
+Profesor (0 a 99), Capacidad m√°xima, Cantidad de socios inscriptos y una SubLista con los
+n√∫meros de socios (0 a 299) inscriptos.
 Desarrollar un programa que implemente los siguientes requerimientos, mediante un
-subprograma por cada Ìtem:
-a) Generar la lista de ACTIVIDADES (inicialmente vacÌa) a partir del archivo de texto
-CARGAGIM.TXT, hay una actividad por lÌnea, separando cada campo con un espacio. Los
-campos son: Codigo Actividad, Nombre Actividad, Legajo Profesor, Capacidad m·xima,
+subprograma por cada √≠tem:
+a) Generar la lista de ACTIVIDADES (inicialmente vac√≠a) a partir del archivo de texto
+CARGAGIM.TXT, hay una actividad por l√≠nea, separando cada campo con un espacio. Los
+campos son: Codigo Actividad, Nombre Actividad, Legajo Profesor, Capacidad m√°xima,
 Cantidad Inscriptos, y los numeros de socios. Los datos de las actividades vienen ordenados
-por cÛdigo de actividad.
-b) En un archivo de texto INSCRIPTOS.TXT (provisto por la c·tedra) se tienen los socios que
-desean inscribirse a las actividades. Cada lÌnea contiene dos campos N˙mero Socio, CÛdigo
+por c√≥digo de actividad.
+b) En un archivo de texto INSCRIPTOS.TXT (provisto por la c√°tedra) se tienen los socios que
+desean inscribirse a las actividades. Cada l√≠nea contiene dos campos N√∫mero Socio, C√≥digo
 Actividad.
 Actualizar la lista de ACTIVIDADES desde el archivo considerando: si la actividad ya tiene
-su capacidad m·xima cubierta o si la actividad no existe, el socio no podr· insertarse en las
-sublista y deber· colocarse en una cola Pendientes que contendr· en cada dato: Nro de
-Socio, CÛdigo de actividad.
+su capacidad m√°xima cubierta o si la actividad no existe, el socio no podr√° insertarse en las
+sublista y deber√° colocarse en una cola Pendientes que contendr√° en cada dato: Nro de
+Socio, C√≥digo de actividad.
 c) A partir de la lista de ACTIVIDADES, generar una matriz de 40x300, desde la
-lista ACTIVIDADES en la que en la posiciÛn [i,j] se almacene un 1 si el n˙mero de socio j
+lista ACTIVIDADES en la que en la posici√≥n [i,j] se almacene un 1 si el n√∫mero de socio j
 hace la actividad i.
-d) A partir de la matriz creada en c) obtener y mostrar de forma recursiva los n˙meros de
+d) A partir de la matriz creada en c) obtener y mostrar de forma recursiva los n√∫meros de
 socios que realicen 3 o mas actividades.
-e) Dado un n˙mero de socio, eliminarlo de la lista ACTIVIDADES (suponer que un socio puede
-hacer una o m·s actividades)*/
+e) Dado un n√∫mero de socio, eliminarlo de la lista ACTIVIDADES (suponer que un socio puede
+hacer una o m√°s actividades)*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,6 +65,7 @@ void actualizarInscriptos(Lista L,TCola *pendientes);
 void generarMatriz(Lista L,int M[MAXFILA][MAXCOL]);
 void mostrarSociosRec(int M[MAXFILA][MAXCOL],int socio);
 void eliminarSocioActividades(Lista *L,int socio);
+void eliminarActividad(Lista *L, int codActividad);
 
 
 
@@ -399,7 +400,7 @@ void eliminarSocioActividades(Lista *L,int socio){
             act=act->sig;
         }
 
-        if(act!=NULL && act->nroSocio == socio ){ // encontrÛ el socio
+        if(act!=NULL && act->nroSocio == socio ){ // encontr√≥ el socio
 
             if(ant==NULL)
                 auxA->sub=act->sig;
@@ -412,5 +413,43 @@ void eliminarSocioActividades(Lista *L,int socio){
         }
 
         auxA=auxA->sig;
+    }
+}
+
+
+void eliminarActividad(Lista *L, int codActividad)
+{
+    nodoA *act, *ant;
+    nodoS *auxS;
+
+    act = *L;
+    ant = NULL;
+
+    // Buscar la actividad
+    while(act != NULL && act->codActividad != codActividad)
+    {
+        ant = act;
+        act = act->sig;
+    }
+
+    // Si la encontr√≥
+    if(act != NULL)
+    {
+        // Eliminar toda la sublista de socios
+        while(act->sub != NULL)
+        {
+            auxS = act->sub;
+            act->sub = act->sub->sig;
+            free(auxS);
+        }
+
+        // Si la actividad est√° al principio
+        if(ant == NULL)
+            *L = act->sig;
+        else
+            ant->sig = act->sig;
+
+        // Liberar el nodo actividad
+        free(act);
     }
 }
