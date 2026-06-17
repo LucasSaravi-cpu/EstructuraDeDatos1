@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1781710630 source:c:\users\user\desktop\ejercicio4guiaadicional\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Colas.h"
+	<string.h>
+
+1780932361 source:c:\users\user\desktop\ejercicio4guiaadicional\colas.c
+	"Colas.h"
+	<stdlib.h>
+
+1780932361 c:\users\user\desktop\ejercicio4guiaadicional\colas.h
+
