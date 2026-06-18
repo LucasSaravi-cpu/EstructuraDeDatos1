@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1781725228 source:c:\users\user\desktop\ejercicio12\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
